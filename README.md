@@ -26,7 +26,7 @@ You will need the following before utilize this CDK stack:
 Setup standard VPC with public, private, and isolated subnets.
 
 ```
-const vpc = new ec2.Vpc(this, 'MyVpc', {
+const vpc = new ec2.Vpc(this, 'Vpc', {
   maxAzs: 3,
   natGateways: 1,
   cidr: '10.0.0.0/16',
@@ -116,9 +116,3 @@ cdk deploy '*' --profile your_profile_name
  * `cdk context`              Manages cached context values
  * `cdk docs (doc)`           Opens the CDK API reference in your browser
  * `cdk doctor`               Checks your CDK project for potential problems
-
- # Pricing
-
-As this cdk stack will create NAT Gateway, please refer the following link for pricing
-
-- [NAT Gateway Pricing](https://aws.amazon.com/vpc/pricing/#natgatewaypricing)
