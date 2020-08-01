@@ -101,6 +101,10 @@ or
 cdk deploy '*' --profile your_profile_name
 ```
 
+# Use cases
+
+Act as a firewall to block all inbound traffic and allow the only necessary port to access the instances.
+
 # Useful commands
 
 ## NPM commands
