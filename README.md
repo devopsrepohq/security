@@ -92,7 +92,6 @@ const bastionSecurityGroup = new ec2.SecurityGroup(this, 'BastionSecurityGroup',
 - allowAllOutbound - Allow outbound rules for access internet
 - description - Description for security group
 
-
 Deploy all the stacks to your aws account.
 
 ```
