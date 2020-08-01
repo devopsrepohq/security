@@ -4,6 +4,12 @@ Use this CDK stack to create a security group for bastion host.
 
 ![Security architecture](https://github.com/devopsrepohq/security/blob/master/_docs/security.png?raw=true)
 
+# What is it?
+
+- A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.
+- A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets.
+- [Comparison of security groups and network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Security.html#VPC_Security_Comparison)
+
 # Features
 
 - [x] Deploy a security group for bastion host.
