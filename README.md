@@ -97,7 +97,7 @@ const bastionSecurityGroup = new ec2.SecurityGroup(this, 'BastionSecurityGroup',
   vpc: vpc,
   allowAllOutbound: true,
   description: 'Security group for bastion host',
-  securityGroupName: 'bastion-security-group'
+  securityGroupName: 'BastionSecurityGroup'
 });
 ```
 
