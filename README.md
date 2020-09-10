@@ -1,21 +1,19 @@
-# Security
-
 Use this CDK stack to create a security group for bastion host.
 
-![Security architecture](https://github.com/devopsrepohq/security/blob/master/_docs/security.png?raw=true)
+![Security architecture](https://images.prismic.io/devopsrepo/a5c46d9c-e88e-4e3e-af04-45d70171cc1c_security.png?auto=compress,format)
 
-# What is it?
+## What is it?
 
 - A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.
 - A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets.
 - [Comparison of security groups and network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Security.html#VPC_Security_Comparison)
 
-# Features
+## Features
 
 - [x] Deploy a security group for bastion host.
 - [x] Add inbound rules for ssh access.
 
-# Prerequisites
+## Prerequisites
 
 You will need the following before utilize this CDK stack:
 
@@ -26,13 +24,13 @@ You will need the following before utilize this CDK stack:
 - [AWS CDK Tookit](https://cdkworkshop.com/15-prerequisites/500-toolkit.html)
 - [AWS Toolkit VSCode Extension](https://github.com/devopsrepohq/aws-toolkit)
 
-# Stack Explain
+## Stack Explain
 
-## cdk.json
+### cdk.json
 
 Define project-name and env context variables in cdk.json
 
-```
+```json
 {
   "context": {
     "project-name": "container",
@@ -42,11 +40,11 @@ Define project-name and env context variables in cdk.json
 }
 ```
 
-## lib/vpc-stack.ts
+### lib/vpc-stack.ts
 
 Setup standard VPC with public, private, and isolated subnets.
 
-```
+```javascript
 const vpc = new ec2.Vpc(this, 'Vpc', {
   maxAzs: 3,
   natGateways: 1,
@@ -78,21 +76,21 @@ const vpc = new ec2.Vpc(this, 'Vpc', {
 
 Create flowlog and log the vpc traffic into cloudwatch
 
-```
+```javascript
 vpc.addFlowLog('FlowLog');
 ```
 
-## lib/security-stack.ts
+### lib/security-stack.ts
 
 Get vpc create from vpc stack
 
-```
+```javascript
 const { vpc } = props;
 ```
 
 Create security group for bastion host
 
-```
+```javascript
 const bastionSecurityGroup = new ec2.SecurityGroup(this, 'BastionSecurityGroup', {
   vpc: vpc,
   allowAllOutbound: true,
@@ -108,31 +106,31 @@ const bastionSecurityGroup = new ec2.SecurityGroup(this, 'BastionSecurityGroup',
 
 Allow ssh access to bastion host
 
-```
+```javascript
 bastionSecurityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(22), 'SSH access');
 ```
 
 Deploy all the stacks to your aws account.
 
-```
+```bash
 cdk deploy '*'
 or
 cdk deploy '*' --profile your_profile_name
 ```
 
-# Use cases
+## Use cases
 
 Act as a firewall to block all inbound traffic and allow the only necessary port to access the instances.
 
-# Useful commands
+## Useful commands
 
-## NPM commands
+### NPM commands
 
  * `npm run build`   compile typescript to js
  * `npm run watch`   watch for changes and compile
  * `npm run test`    perform the jest unit tests
 
-## Toolkit commands
+### Toolkit commands
 
  * `cdk list (ls)`            Lists the stacks in the app
  * `cdk synthesize (synth)`   Synthesizes and prints the CloudFormation template for the specified stack(s)
